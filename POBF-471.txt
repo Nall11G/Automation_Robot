@@ -1,0 +1,189 @@
+*** Settings ***
+Library           Selenium2Library
+Library           BuiltIn
+Library           Collections
+
+*** Variables ***
+${Dept}           xpath=.//*[@id='sidebar_nav']/li[1]/a
+${Handgun Cate-Lever}    xpath=.//*[@id='sidebar_nav']/li[1]/ul/li[3]/a
+${Shotgun xpath}    xpath=.//*[@id='sidebar_nav']/li[3]/a
+${Shot Cat}       xpath=.//*[@id='sidebar_nav']/li[3]/ul/li[2]/a
+${Get Discount_Hand}    xpath=.//*[@id='center_column']/div[1]/div[3]/ul/li[2]/table[4]/tbody/tr/td[2]/a
+${Get Discount_Shot}    xpath=.//*[@id='center_column']/div[1]/div[2]/ul/li[2]/table[4]/tbody/tr/td[2]/a
+${Zipcode}        Id=zip_code
+${Get button}     name=get_discount
+${Map List}       xpath=.//*[@id='dealer_list']
+${Dealer}         xpath=.//*[@id='dealer_list']/a[2]/table/tbody/tr/td[2]
+${Cart button}    xpath=.//*[@id='catalog_detail_price_bar']/table/tbody/tr/td[5]/a
+${Shipping}       xpath=.//*[@id='shipping_preference']
+${Email}          Id=email_address
+${Phone No}       Id=phone_number
+${Name Id}        Id=cc_name
+${CCNumber}       Id=cc_number'
+${Address}        Id=cc_address
+${City}           Id=cc_city
+${State}          Id=cc_state
+${Code}           Id=cc_code
+${Dep List}       xpath=.//*[@id='sidebar']/h2
+${Checkout}       Id=checkout_button
+${Get cart}       xpath=.//*[@id='center_column']/div[1]/div[3]/ul/li[2]/table[4]/tbody/tr/td[2]/a
+
+*** Test Cases ***
+TC_01
+    Open Browser    http://gearfire.com/    Firefox
+    Maximize Browser Window
+    Click Element    ${Dep List}
+    Click Element    ${Dept}
+    Wait Until Element Is Visible    ${Handgun Cate-Lever}
+    Click Element    ${Handgun Cate-Lever}
+    : FOR    ${INDEX}    IN RANGE    500
+    \    Log    ${INDEX}
+    \    Scroll To Page    500    ${INDEX}
+    Wait Until Element Is Visible    ${Get Discount_Hand}
+    Click Element    ${Get Discount_Hand}
+    Wait Until Element Is Visible    ${Get cart}
+    Click Element    ${Get cart}
+    Input Text    ${Zipcode}    80111
+    @{Parent}=    Get Window Titles
+    Set Suite Variable    @{Parent}
+    Click Element    ${Get button}
+    Wait Until Element Is Enabled    ${Dealer}
+    Click Element    ${Dealer}
+    Wait Until Element Is Enabled    ${Shot Cat}
+    @{window}=    Get Window Titles
+    : FOR    ${INDEX}    IN RANGE    0    1000
+    \    Log    ${INDEX}
+    \    Scroll To Page    1000    ${INDEX}
+    Capture Page Screenshot
+    Wait Until Element Is Visible    ${Cart button}
+    Click Element    ${Cart button}
+    : FOR    ${INDEX}    IN RANGE    1000
+    \    Log    ${INDEX}
+    \    Scroll Up Page    1000    ${INDEX}
+    Click Element    ${Checkout}
+    Selenium2Library.Set Selenium Implicit Wait    50s
+    Capture Page Screenshot
+    Input Text    ${Email}    nallavan@mstsolutions.com
+    Input Text    ${Phone No}    7777777777
+    Input Text    ${Name Id}    Sample Test Demo1
+    Input Text    ${Address}    7845 Trinity Rd Ste #103
+    Input Text    ${Zipcode}    38019
+    Input Text    ${City}    Cordova
+    Input Text    ${CCNumber}    4111111111111111
+    @{StateList}=    Get List Items    ${State}
+    Select From List By Value    ${State}    @{StateList}[45]
+    Input Text    ${Code}    768
+    @{Delivery}=    Get List Items    ${Shipping}
+    Select From List    ${Shipping}    @{Delivery}[1]
+    Capture Page Screenshot
+    @{Checkout}=    Get Window Titles
+    Close Browser
+
+TC_02
+    Open Browser    http://gearfire.com/    Firefox
+    Maximize Browser Window
+    Click Element    ${Dep List}
+    Click Element    ${Dept}
+    Wait Until Element Is Visible    ${Handgun Cate-Lever}
+    Click Element    ${Handgun Cate-Lever}
+    : FOR    ${INDEX}    IN RANGE    500
+    \    Log    ${INDEX}
+    \    Scroll To Page    500    ${INDEX}
+    Wait Until Element Is Visible    ${Get Discount_Hand}
+    Click Element    ${Get Discount_Hand}
+    Wait Until Element Is Visible    ${Get cart}
+    Click Element    ${Get cart}
+    Input Text    ${Zipcode}    80111
+    @{Parent}=    Get Window Titles
+    Set Suite Variable    @{Parent}
+    Click Element    ${Get button}
+    Wait Until Element Is Enabled    ${Dealer}
+    Click Element    ${Dealer}
+    Wait Until Element Is Enabled    ${Shot Cat}
+    @{window}=    Get Window Titles
+    : FOR    ${INDEX}    IN RANGE    0    1000
+    \    Log    ${INDEX}
+    \    Scroll To Page    1000    ${INDEX}
+    Capture Page Screenshot
+    Wait Until Element Is Visible    ${Cart button}
+    Click Element    ${Cart button}
+    : FOR    ${INDEX}    IN RANGE    1000
+    \    Log    ${INDEX}
+    \    Scroll Up Page    1000    ${INDEX}
+    Click Element    ${Checkout}
+    Selenium2Library.Set Selenium Implicit Wait    50s
+    Capture Page Screenshot
+    Input Text    ${Email}    nallavan@mstsolutions.com
+    Input Text    ${Phone No}    7777777777
+    Input Text    ${Name Id}    Sample Test Demo1
+    Input Text    ${Address}    7845 Trinity Rd Ste #103
+    Input Text    ${Zipcode}    38019
+    Input Text    ${City}    Cordova
+    Input Text    ${CCNumber}    4111111111111111
+    @{StateList}=    Get List Items    ${State}
+    Select From List By Value    ${State}    @{StateList}[45]
+    Input Text    ${Code}    768
+    @{Delivery}=    Get List Items    ${Shipping}
+    Select From List    ${Shipping}    @{Delivery}[1]
+    Capture Page Screenshot
+    @{Checkout}=    Get Window Titles
+    Close Browser
+
+TC_03
+    Open Browser    http://gearfire.com/    Firefox
+    Maximize Browser Window
+    Click Element    ${Dep List}
+    Click Element    ${Dept}
+    Wait Until Element Is Visible    ${Handgun Cate-Lever}
+    Click Element    ${Handgun Cate-Lever}
+    : FOR    ${INDEX}    IN RANGE    500
+    \    Log    ${INDEX}
+    \    Scroll To Page    500    ${INDEX}
+    Wait Until Element Is Visible    ${Get Discount_Hand}
+    Click Element    ${Get Discount_Hand}
+    Wait Until Element Is Visible    ${Get cart}
+    Click Element    ${Get cart}
+    Input Text    ${Zipcode}    80111
+    @{Parent}=    Get Window Titles
+    Set Suite Variable    @{Parent}
+    Click Element    ${Get button}
+    Wait Until Element Is Enabled    ${Dealer}
+    Click Element    ${Dealer}
+    Wait Until Element Is Enabled    ${Shot Cat}
+    @{window}=    Get Window Titles
+    : FOR    ${INDEX}    IN RANGE    0    1000
+    \    Log    ${INDEX}
+    \    Scroll To Page    1000    ${INDEX}
+    Capture Page Screenshot
+    Wait Until Element Is Visible    ${Cart button}
+    Click Element    ${Cart button}
+    : FOR    ${INDEX}    IN RANGE    1000
+    \    Log    ${INDEX}
+    \    Scroll Up Page    1000    ${INDEX}
+    Click Element    ${Checkout}
+    Selenium2Library.Set Selenium Implicit Wait    50s
+    Capture Page Screenshot
+    Input Text    ${Email}    nallavan@mstsolutions.com
+    Input Text    ${Phone No}    7777777777
+    Input Text    ${Name Id}    Sample Test Demo1
+    Input Text    ${Address}    7845 Trinity Rd Ste #103
+    Input Text    ${Zipcode}    38019
+    Input Text    ${City}    Cordova
+    Input Text    ${CCNumber}    4111111111111111
+    @{StateList}=    Get List Items    ${State}
+    Select From List By Value    ${State}    @{StateList}[45]
+    Input Text    ${Code}    768
+    @{Delivery}=    Get List Items    ${Shipping}
+    Select From List    ${Shipping}    @{Delivery}[1]
+    Capture Page Screenshot
+    @{Checkout}=    Get Window Titles
+    Close Browser
+
+*** Keywords ***
+Scroll To Page
+    [Arguments]    ${width}    ${height}
+    Execute Javascript    window.scrollTo(${width} , ${height})
+
+Scroll Up Page
+    [Arguments]    ${width}    ${height}
+    Execute Javascript    window.scrollBy(${width} , ${height})
