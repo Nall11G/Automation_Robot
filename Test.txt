@@ -1,0 +1,12 @@
+*** Settings ***
+Library           Selenium2Library
+Library           BuiltIn
+Library           Collections
+
+*** Variables ***
+
+*** Test Cases ***
+TC_01
+    Open Browser    http://gearfire.com/    Firefox
+    Maximize Browser Window
+
